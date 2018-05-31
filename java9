@@ -1,0 +1,6 @@
+  之所以替换是因为 之前一直是最小单位是一个char，用到两个byte,但是java8是基于latin1的，
+  而这个latin1编码可以用一个byte标识，所以当你数据明明可以用到一个byte的时候，
+  我们用到了一个最小单位chat两个byte，就多出了一个byte的空间。所以java9在这一方面进行了更新，
+  现在的java9 是基于ISO/latin1/Utf-16  ,latin1和ISO用一个byte标识,UTF-16用两个byte标识，
+  java9会自动识别用哪个编码，当数据用到1byte，就会使用iSO或者latin1 ，当空间数据满足2byte的时候，
+  自动使用utf-16,节省了很多空间

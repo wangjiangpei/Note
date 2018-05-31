@@ -1,0 +1,26 @@
+On Android 4.4 things did change under the hood and the none standard SHOUTcast
+ ICY header response is no longer supported. Just like the Apache HTTPClient library.
+
+
+详情请看：
+
+http://stackoverflow.com/questions/19738798/android-4-4-http-api-bugs/19836471
+
+
+
+解决方案：
+
+1.服务器忽略get请求头
+
+2.post提交数据
+
+
+红米手机4.4.4打开应用闪退，爆java.lang.NoClassDefFoundError: org.xutils.common.task.TaskControllerImpl，
+定位在application的xutils3的初始化上面，其他5.0+的手机打开正常，请问有人遇到嘛
+xutils3初始化语句 x.Ext.init(this);
+ Caused by: java.lang.ClassNotFoundException: Didn't find class "org.xutils.common.task.TaskControllerImpl"
+ on path: DexPathList[[zip file "/data/app/com.yinan.hotel-2.apk"],nativeLibraryDirectories=[/data/app-lib/com.yinan.hotel-2, /vendor/lib, /system/lib]]
+ 这个问题解决了，我产生此问题的原型是由于在android stuido 中进行了分包的处理，
+ 分包处理后把项目application继承的父类改为MultiDexApplication 即可。
+
+

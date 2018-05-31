@@ -1,0 +1,22 @@
+  maven{
+            url 'http://localhost:8081/nexus/content/repositories/releases/'
+        }
+        //------------------------------------------
+//读卡
+compile 'com.yinansoft:readcard:1.0.0'
+
+public class App extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ReaderSDK.init(this);
+
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        ReaderSDK.getInstance().onTerminate();
+    }
+}
+//--------------------------------------------------

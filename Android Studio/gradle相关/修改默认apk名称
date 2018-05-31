@@ -1,0 +1,10 @@
+
+   修改默认apk名称
+   gradle android标签下
+   android.applicationVariants.all { variant ->
+        variant.outputs.each {
+            output ->
+                output.outputFile = new File(output.outputFile.parent, defaultConfig.applicationId + "-" + buildType.name + "Nathon-v" +
+                        defaultConfig.versionName +"_"+defaultConfig.versionCode+".apk");
+        }
+    }

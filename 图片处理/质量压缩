@@ -1,0 +1,41 @@
+1 分类
+
+Android图片压缩结合多种压缩方式，常用的有尺寸压缩、质量压缩、采样率压缩以及通过JNI调用libjpeg库来进行压缩。
+参考此方法：Android-BitherCompress
+
+备注：对于资源图片直接使用：tiny压缩
+
+2 质量压缩
+
+（1）原理：保持像素的前提下改变图片的位深及透明度，（即：通过算法抠掉(同化)了图片中的一些某个些点附近相近的像素），达到降低质量压缩文件大小的目的。
+
+注意：它其实只能实现对file的影响，对加载这个图片出来的bitmap内存是无法节省的，还是那么大。因为bitmap在内存中的大小是按照像素计算的，也就是width*height，对于质量压缩，并不会改变图片的真实的像素（像素大小不会变）。
+
+（2）使用场景：将图片压缩后将图片上传到服务器，或者保存到本地。根据实际需求来。
+
+（3）源码示例
+
+/**
+     * 3.质量压缩
+     * 设置bitmap options属性，降低图片的质量，像素不会减少
+     * 第一个参数为需要压缩的bitmap图片对象，第二个参数为压缩后图片保存的位置
+     * 设置options 属性0-100，来实现压缩
+     *
+     * @param bmp
+     * @param file
+     */
+    public static void qualityCompress(Bitmap bmp, File file) {
+        // 0-100 100为不压缩
+        int quality = 20;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        // 把压缩后的数据存放到baos中
+        bmp.compress(Bitmap.CompressFormat.JPEG, quality, baos);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(baos.toByteArray());
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }

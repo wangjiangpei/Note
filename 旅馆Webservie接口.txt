@@ -1,0 +1,103 @@
+旅馆系统WebService接口说明
+
+上传地址(根据实际部署情况而定)    
+http://192.168.1.210/LGwebservice/Service1.asmx
+
+
+一、UpdataLKXX （上传旅客信息）
+public string UpdataLKXX(string lvkedaima, string lvkeshuju)
+1.参数：string lvkedaima——旅客代码（如：1501050999201208220001）
+        string lvkeshuju——旅客数据
+      
+lvkeshuju——
+a.国内旅客数据 如：
+<dj_lvkedaima>1501050999201208220001</dj_lvkedaima><dj_xingming>金阳</dj_xingming><dj_xingbie>2</dj_xingbie><dj_minzu>01</dj_minzu><dj_chushengriqi>1978-10-27</dj_chushengriqi><dj_zhengjianleixing>13</dj_zhengjianleixing><dj_zhengjianhaoma>110102197810272321</dj_zhengjianhaoma><dj_shengshixian>110102</dj_shengshixian><dj_xiangzhi>北京市西城区复兴门外大街999号院11号楼3单元502室</dj_xiangzhi><dj_ruzhushijian>2012-08-22 10:56:12</dj_ruzhushijian><dj_ruzhufanghao>111</dj_ruzhufanghao><dj_tuifangshijian></dj_tuifangshijian><dj_chuansongshijian>2012-08-22 10:56:13</dj_chuansongshijian><dj_zhaopianchangdu>2657</dj_zhaopianchangdu><dj_zhaopian>/9j/4AAQSkZJRgABAQEAYABgAl6ONYhgVKDmqQnOcYFTxuTWTNINPYnPWgU3NLUGjF6dKKBRTJP/9k=</dj_zhaopian><dj_lvguandaima>1501050999</dj_lvguandaima><dj_xinyongkahao></dj_xinyongkahao><DJ_Finger>指纹图像（Base64String）</DJ_Finger><DJ_Face>人脸图像（Base64String）</DJ_Face><DJ_FaceIR>人脸图像红外（Base64String）</DJ_FaceIR><DJ_ComparisonResult>人脸比对结果</DJ_ComparisonResult>
+
+b.国外旅客数据 如：
+<f_lvkedaima>4501050999201701120003</f_lvkedaima>
+<f_lastname>英文姓</f_lastname><f_firstname>英文名</f_firstname>
+<f_name>中文姓名</f_name><f_xingbie>1</f_xingbie>
+<f_birth>2001-01-01</f_birth><f_guoji>CHN</f_guoji>
+<f_idtype>10</f_idtype><f_idnumber>zhengjianhao</f_idnumber>
+<f_qianzhengzhonglei>M</f_qianzhengzhonglei><f_qianzhenghaoma>qianzhenghaoma</f_qianzhenghaoma>
+<f_qianfajiguan>GBRC</f_qianfajiguan><f_tingliuqizhi>2100-01-31 00:00:00</f_tingliuqizhi>
+<f_rujingriqi>2100-01-01 00:00:00</f_rujingriqi><f_zhaopian></f_zhaopian>
+<f_rujingkouan>F220381</f_rujingkouan><f_binguanid>4501050999</f_binguanid>
+<f_jiedaidanwei>接待单位</f_jiedaidanwei><f_ruzhushijian>2017-01-12 12:10:10</f_ruzhushijian>
+<f_room>ruzhufangh</f_room><f_tuifangshijian>2017-01-18 12:10:10</f_tuifangshijian>
+<f_chuansongshijian>2017-01-12 12:10:13</f_chuansongshijian><f_hechulai>GIB</f_hechulai>
+<f_hechulaizt>1</f_hechulaizt><f_quhechu>150105</f_quhechu>
+<f_quhechuzt>0</f_quhechuzt><f_zhaopianchangdu>0</f_zhaopianchangdu>
+<f_lvguanxingzhengquhua>450105</f_lvguanxingzhengquhua><f_dengjiren>管理员</f_dengjiren>
+<f_dengjiriqi>2017-01-12 12:10:10</f_dengjiriqi><f_zhiyedaima>zy</f_zhiyedaima>
+<f_gongzuojigoudm>在华工作机构代码</f_gongzuojigoudm>
+<f_gongzuojigoumc>在华工作机构名称</f_gongzuojigoumc>
+<f_zhufangzhonglei>住房</f_zhufangzhonglei>
+<f_benrenlxdh>本人联系电话</f_benrenlxdh><f_fangzhusfzh>房主身份证号</f_fangzhusfzh>
+<f_jinjilianxiren>紧急情况下联系人</f_jinjilianxiren><f_jinjilianxidh>紧急情况下联系电话</f_jinjilianxidh>
+<f_beizhu>备注</f_beizhu><f_zhusuyuanyin>01</f_zhusuyuanyin>
+<f_xinyongkalx>信用卡类型</f_xinyongkalx><f_xinyongkahao>信用卡号</f_xinyongkahao>
+<f_Finger>指纹图像（Base64String）</f_Finger><f_Face>人脸图像（Base64String）</f_Face>
+<f_FaceIR>人脸图像红外（Base64String）</f_FaceIR><f_ComparisonResult>人脸比对结果</f_ComparisonResult>
+
+2.返回值：string
+成功返回：上传成功
+失败返回错误原因。
+
+
+二、 UpdataVisitor （上传访客信息）
+public string UpdataVisitor(string parameters)
+1.参数：string parameters——访客数据（json字符串）
+parameters如：
+{"v_Code":"访客代码(1501050999201208230001)","v_Name_first":"访客姓名1","v_Name_Last":"访客姓名2",
+    "v_Sex":"性别(1)","v_BirthDay":"生日(1978-10-27)","v_Type":"访客类型国内或国外(1)",
+"l_Code":"被访人员代码(1501050999201208230001)","l_Type":"被访人员类型国内或国外(1)",
+"v_Type_Certificate":"访客证件类型(11)","v_Code_Cerrificate":"访客证件号码(110102197810272321)",
+"v_Time_Visite":"来访时间(2012-08-22 10:56:12)","v_Time_Leave":"签退时间(2012-08-22 10:56:12)",
+"v_Time_Upload":"上传时间","v_pic_Cerrificate":"证件照片Base64String","v_Finger":"指纹Base64String",
+"v_Face":"现场彩照Base64String","v_FACEIR":"现场黑白照Base64String","v_COMPARISONRESULT":"比对结果"}
+
+2.返回值：string
+成功返回：上传成功
+失败返回错误原因。
+
+
+三、UpdateHotelState（更新旅馆服务状态，供客服系统调用）
+public string UpdateHotelState(string json)
+1.参数：string json——json字符串
+json说明：
+{"H_LVGUANDAIMA":"旅馆代码","nState":服务状态}
+如：
+{"H_LVGUANDAIMA":"1501020001","nState":1}
+
+nState说明：
+0——正常
+1——到期
+
+2.返回值：string 
+a.成功返回：上传成功
+b.失败返回错误原因。
+
+
+四、UpdataEasyAlarm（上传一键报警信息）
+public string UpdataEasyAlarm(string parameters)
+1.参数：string parameters——一键报警数据(json字符串)
+parameters说明：
+{"cHotelCode":"旅馆代码","fLongitude":经度,"fLatitude":纬度}
+如：
+{"cHotelCode":"1501020001","fLongitude":40.837563,"fLatitude":40.833}
+
+2.返回值：string 
+a.成功返回：上传成功
+b.失败返回错误原因。
+
+
+五、 UpdataEmployee （上传从业人员信息）
+public string UpdataEmployee(string parameters)
+1.参数：string parameters——从业人员数据（json字符串）
+parameters如：
+{"EmployeeCode":"从业人员代码(1501050999201208230001)","Name":"姓名","Sex":"性别(1)","Nation":"民族(01)","Birth":"生日(1978-10-27)","IdCard":"证件号码(110102197810272321)","Phone":"电话","IdCardAddress":"详细地址","Hiredate":"入职时间(2012-08-22 10:56:12)","LeaveDate":"离职时间(2012-08-22 10:56:12)","HotelCode":"旅馆代码(1501050999)","PhotoGraph":"证件照片Base64String","Face":"现场彩照Base64String","FaceIR":"现场黑白照Base64String","Finger":"指纹Base64String","Remark":"备注"}
+
+2.返回值：string
+成功返回：上传成功
+失败返回错误原因。

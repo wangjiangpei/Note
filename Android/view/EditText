@@ -1,0 +1,2 @@
+全屏下Edittext右侧按钮文字
+android:imeActionLabel="@string/launch"

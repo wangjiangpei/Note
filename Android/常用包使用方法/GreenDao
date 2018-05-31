@@ -1,0 +1,40 @@
+ 1,
+   compile 'org.greenrobot:greendao:3.0.1'
+   compile 'org.greenrobot:greendao-generator:3.0.0'
+ 2,
+  dependencies {
+         classpath 'com.android.tools.build:gradle:2.3.3'
+
+         classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
+         // NOTE: Do not place your application dependencies here; they belong
+         // in the individual module build.gradle files
+     }
+  3,
+     greendao {
+         schemaVersion 1
+         daoPackage 'com.yinan.greendaotest.model'
+         targetGenDir 'src/main/java'
+     }
+
+  4,
+ apply plugin: 'com.android.application'
+ apply plugin: 'org.greenrobot.greendao'
+ 5 make Project
+ 6 注解
+     @Entity   标识实体类，greenDAO会映射成sqlite的一个表，表名为实体类名的大写形式
+     @Id 标识主键，该字段的类型为long或Long类型，autoincrement设置是否自动增长
+     @Property       标识该属性在表中对应的列名称, nameInDb设置名称
+     @Transient      标识该属性将不会映射到表中，也就是没有这列
+     @NotNull         设置表中当前列的值不可为空
+     @Convert         指定自定义类型(@linkPropertyConverter)
+     @Generated   greenDAO运行所产生的构造函数或者方法，被此标注的代码可以变更或者下次运行时清除
+     @Index    使用@Index作为一个属性来创建一个索引；定义多列索引(@link Entity#indexes())
+     @JoinEntity     定义表连接关系
+     @JoinProperty         定义名称和引用名称属性关系
+     @Keep     注解的代码段在GreenDao下次运行时保持不变
+              1.注解实体类：默认禁止修改此类
+               2.注解其他代码段，默认禁止修改注解的代码段
+     @OrderBy        指定排序
+     @ToMany         定义与多个实体对象的关系
+     @ToOne  定义与另一个实体（一个实体对象）的关系
+     @Unique 向数据库列添加了一个唯一的约束

@@ -1,0 +1,8 @@
+　　1.随机插入、随机删除操作中，用TreeList 效率最高；
+　　2.在只需要追加、迭代的环境下，LinkedList 效率最高；
+　　3.平均效率来讲，ArrayList 相对平衡，但如果海量随机操作，还是会造成性能瓶颈；
+　　4.CopyOnWriteArrayList 因为线程安全的原因，致使性能降低很多，所以慎用；
+　　5.Vector 没有传说中那么低的效率；
+　　6.让Stack 来做List 的事可以，不过语义上Stack 不应该做过多的List 的事情；
+　　7.在排序中，ArrayList 具有最好的性能，TreeList 平均性能也不错，LinkedList 的排序效率受元素初始状态的影响很大。
+　　8.各种List 间转换几乎没有时间损耗。

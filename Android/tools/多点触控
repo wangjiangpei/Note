@@ -1,0 +1,4 @@
+按钮列表去除多点触控
+多按钮父容器添加
+    android:splitMotionEvents="false"
+

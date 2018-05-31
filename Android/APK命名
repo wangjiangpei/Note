@@ -1,0 +1,31 @@
+          //apk 名称路径
+
+    //2.0写法
+    android.applicationVariants.all { variant ->
+        variant.outputs.each {
+            output ->
+                output.outputFile = new File(output.outputFile.parent, defaultConfig.applicationId + "-" + buildType.name + "-Nathon-v" +
+                        defaultConfig.versionName + "_" + defaultConfig.versionCode + ".apk");
+        }
+    }
+    //3.0写法
+
+    //    applicationVariants.all { variant ->
+    //        //这个修改输出的APK路径
+    //        if (variant.buildType.name == "debug") {
+    //            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apks/debug")
+    //        } else {
+    //            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/apks/release")
+    //        }
+    //
+    //        def createTime = new Date().format("YYYY-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
+    //        variant.getPackageApplication().outputScope.apkDatas.forEach { apkData ->
+    //            //这个修改输出APK的文件名
+    //            apkData.outputFileName = "YaoPing-" +
+    //                    variant.versionName + "_" +
+    //                    createTime + "_" +
+    //                    variant.flavorName + "_" +
+    //                    variant.buildType.name +
+    //                    ".apk"
+    //        }
+    //    }

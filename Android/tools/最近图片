@@ -1,0 +1,34 @@
+   public static String getLastPhotoByPath(Context context) {
+        Cursor myCursor = null;
+        String pathLast="";
+        // Create a Cursor to obtain the file Path for the large image
+        String[] largeFileProjection = {
+                MediaStore.Images.ImageColumns._ID,
+                MediaStore.Images.ImageColumns.DATA,
+                MediaStore.Images.ImageColumns.ORIENTATION,
+                MediaStore.Images.ImageColumns.DATE_TAKEN };
+        String largeFileSort = MediaStore.Images.ImageColumns._ID + " DESC";
+        myCursor =
+//                  BaseApplication.getInstance().
+                context.getContentResolver().query(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        largeFileProjection, null, null, largeFileSort);
+
+        if (myCursor.getCount()<1) {
+            myCursor.close();
+            return pathLast;
+        }
+        while (myCursor.moveToNext()) {
+            String data = myCursor.getString(myCursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA));
+            File f = new File(data);
+            if (f.exists()) {//第一个图片文件，就是最近一次拍照的文件；
+                pathLast=f.getPath();
+                System.out.println("f.getPath() = "+pathLast);
+                myCursor.close();
+                return pathLast;
+            }
+        }
+        myCursor.close();
+        return pathLast;
+
+    }

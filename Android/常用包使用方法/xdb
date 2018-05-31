@@ -1,0 +1,24 @@
+//public class DButils {
+//    static File file = new File(Environment.getExternalStorageDirectory() + "/yinan/");
+//    public static DbManager getManager(){
+//        if (!file.isFile()){
+//            file.mkdirs();
+//        }
+//        DbManager.DaoConfig daoConfig = new DbManager.DaoConfig()
+//                .setDbName("secondHand.db")    //设置数据库名称
+//                .setDbDir(file)  //数据库路径
+//                .setDbVersion(1)  //数据库版本
+//                .setDbOpenListener(new DbManager.DbOpenListener() {
+//                    @Override
+//                    public void onDbOpened(DbManager db) {
+//                        Logs.i( "创建数据库成功");
+//                    }
+//                }).setDbUpgradeListener(new DbManager.DbUpgradeListener() {
+//                    @Override
+//                    public void onUpgrade(DbManager db, int oldVersion, int newVersion) {
+//                        Logs.i( "数据库更新了");
+//                    }
+//                });
+//        return  x.getDb(daoConfig);
+//    }
+//}

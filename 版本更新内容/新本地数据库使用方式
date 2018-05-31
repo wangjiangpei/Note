@@ -1,0 +1,16 @@
+
+数据表
+字段
+state 0 未上传 1 上传
+type   0  国内旅客  1  国外旅客   2 访客   3从业人员   ....
+dateId 1   内容id1
+dateId 2   内容id2
+dateId 3   内容id3
+context  内容   需要上传的数据
+异常表
+dateType  内容类型
+dateId    数据表id
+type    异常类型
+
+
+

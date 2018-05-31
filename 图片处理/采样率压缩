@@ -1,0 +1,40 @@
+（1）原理：设置图片的采样率，降低图片像素
+
+（2） 好处：是不会先将大图片读入内存，大大减少了内存的使用，也不必考虑将大图片读入内存后的释放事宜。
+
+（3）问题：因为采样率是整数，所以不能很好的保证图片的质量。如我们需要的是在2和3采样率之间，用2的话图片就大了一点，但是用3的话图片质量就会有很明显的下降，这样也无法完全满足我的需要。
+
+（4）源码示例
+/**
+     * 5.采样率压缩（设置图片的采样率，降低图片像素）
+     *
+     * @param filePath
+     * @param file
+     */
+    public static void samplingRateCompress(String filePath, File file) {
+        // 数值越高，图片像素越低
+        int inSampleSize = 8;
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = false;
+//          options.inJustDecodeBounds = true;//为true的时候不会真正加载图片，而是得到图片的宽高信息。
+        //采样率
+        options.inSampleSize = inSampleSize;
+        Bitmap bitmap = BitmapFactory.decodeFile(filePath, options);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        // 把压缩后的数据存放到baos中
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        try {
+            if (file.exists()) {
+                file.delete();
+            } else {
+                file.createNewFile();
+            }
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(baos.toByteArray());
+            fos.flush();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }

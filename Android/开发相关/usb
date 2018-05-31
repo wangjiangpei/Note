@@ -1,0 +1,120 @@
+一、VID和PID
+  PID/VID唯一标识一个设备，HardwareID是为了给系统识别的 ，他是根据PID/VID而生成的。这个与序列号没什么关系，
+  序列号一般都是厂家固化到芯片中的信息而已。GUID只是为了标志你安装的设备是属于一个什么类当中，
+  这个类可以显示再设备管理器中。比如：你可以定义一个类，当然这个类有与系统中任何类都不同的GUID，
+  然后选择一个图标和类名，就可以同网卡等其他设备一起显示在设备管理器下的根目录中了
+
+  根据USB规范的规定，所有的USB设备都有供应商ID（VID）和产品识别码（PID），
+  主机通过不同的VID和PID来区别不同的设备，VID和PID都是两个字节长，
+  其中，供应商ID（VID）由供应商向USB执行论坛申请，每个供应商的VID是唯一的，
+  PID由供应商自行决定，理论上来说，不同的产品、相同产品的不同型号、相同型号的不同设计的产品最好采用不同的PID，以便区别相同厂家的不同设备。
+
+   VID和PID通常情况下有两种存储方式，第一种是主控生产商的VID和PID，存储在主控的bootcode中；
+   第二种是设备生产商的VID和PID，该VID和PID存储在主控外部的非易失性存储设备中（EEPROM或Flash）
+   的设备固件中，当USB设备连接主机时，如果固件中有设备生产商的VID和PID，会将该VID和PID报告给主机，
+   而忽略主控生产商的VID和PID。所以理论上一个USB存储设备的VID应该是设备生产商的VID，而不是主控生产商的VID，
+   这两个VID应该是不同的（主控生产商自己生产的设备除外）。
+
+   由于VID和PID重复并不会对产品的使用带来严重影响，很多USB设备生产商（山寨厂居多）为了方便，
+   并不会向USB执行论坛申请自己的VID，而是依然沿用主控生产商的VID或随便向产品写入VID和PID；
+   同时，正规厂家只需要申请VID，PID由厂家自行确定，所以存在相同型号的产品，可能采用了不同的主控
+   （商业需要，很正常），而他们的PID是一样的，基于上述原因通过VID和PID就不能准确识别USB设备的主控型号，
+   这个问题大家在使用USB设备的过程中需要注意。
+
+二、常用设备VID和PID
+
+1.摄像头VID和PID
+
+[plain] view plain copy
+{USB_DEVICE (0x0733, 0x0430)}, /* Intel PC Camera Pro */
+{USB_DEVICE (0x0733, 0x0401)}, /* Intel Create and Share */
+{USB_DEVICE (0x99FA, 0x8988)}, /* Grandtec V.cap */
+{USB_DEVICE (0x0733, 0x0402)}, /* ViewQuest M318B */
+{USB_DEVICE (0x0733, 0x0110)}, /* ViewQuest VQ110 */
+{USB_DEVICE (0x040A, 0x0002)}, /* Kodak DVC-325 */
+{USB_DEVICE (0x055f, 0xc420)}, /* Mustek gSmart Mini 2 */
+{USB_DEVICE (0x055f, 0xc520)}, /* Mustek gSmart Mini 3 */
+{USB_DEVICE (0x041E, 0x400A)}, /* Creative PC-CAM 300 */
+{USB_DEVICE (0x084D, 0x0003)}, /* D-Link DSC-350 */
+{USB_DEVICE (0x041E, 0x400B)}, /* Creative PC-CAM 600 */
+{USB_DEVICE (0x8086, 0x0630)}, /* Intel Pocket PC Camera */
+{USB_DEVICE (0x8086, 0x0110)}, /* Intel Easy PC Camera */
+{USB_DEVICE (0x0506, 0x00df)}, /* 3Com HomeConnect Lite */
+{USB_DEVICE (0x040a, 0x0300)}, /* Kodak EZ200 */
+{USB_DEVICE (0x04fc, 0x504b)}, /* Maxell MaxPocket LE 1.3 */
+{USB_DEVICE (0x08ca, 0x2008)}, /* Aiptek Mini PenCam 2 M */
+{USB_DEVICE (0x08ca, 0x0104)}, /* Aiptek PocketDVII 1.3 */
+{USB_DEVICE (0x08ca, 0x2018)}, /* Aiptek Pencam SD 2M */
+{USB_DEVICE (0x04fc, 0x504a)}, /* Aiptek Mini PenCam 1.3 */
+{USB_DEVICE (0x055f, 0xc530)}, /* Mustek Gsmart LCD 3 */
+{USB_DEVICE (0x055f, 0xc650)}, /* Mustek MDC5500Z */
+{USB_DEVICE (0x052b, 0x1513)}, /* Megapix V4 */
+{USB_DEVICE (0x08ca, 0x0103)}, /* Aiptek PocketDV */
+{USB_DEVICE (0x0af9, 0x0010)}, /* Hama USB Sightcam 100 */
+{USB_DEVICE (0x1776, 0x501c)}, /* Arowana 300K CMOS Camera */
+{USB_DEVICE (0x08ca, 0x0106)}, /* Aiptek Pocket DV3100+ */
+{USB_DEVICE (0x08ca, 0x2010)}, /* Aiptek PocketCam 3M */
+{USB_DEVICE (0x0458, 0x7004)}, /* Genius VideoCAM Express V2 */
+{USB_DEVICE (0x04fc, 0x0561)}, /* Flexcam 100 */
+{USB_DEVICE (0x055f, 0xc430)}, /* Mustek Gsmart LCD 2 */
+{USB_DEVICE (0x04fc, 0xffff)}, /* Pure DigitalDakota */
+{USB_DEVICE (0xabcd, 0xcdee)}, /* Petcam */
+{USB_DEVICE (0x04a5, 0x3008)}, /* Benq DC 1500 */
+{USB_DEVICE (0x046d, 0x0960)}, /* Logitech Inc. ClickSmart 420 */
+{USB_DEVICE (0x046d, 0x0901)}, /* Logitech Inc. ClickSmart 510 */
+{USB_DEVICE (0x04a5, 0x3003)}, /* Benq DC 1300 */
+{USB_DEVICE (0x0af9, 0x0011)}, /* Hama USB Sightcam 100 */
+{USB_DEVICE (0x055f, 0xc440)}, /* Mustek DV 3000 */
+{USB_DEVICE (0x041e, 0x4013)}, /* Creative Pccam750 */
+{USB_DEVICE (0x060b, 0xa001)}, /* Maxell Compact Pc PM3 */
+{USB_DEVICE (0x04a5, 0x300a)}, /* Benq DC3410 */
+{USB_DEVICE (0x04a5, 0x300c)}, /* Benq DC1016 */
+{USB_DEVICE (0x0461, 0x0815)}, /* Micro Innovation IC200 */
+{USB_DEVICE (0x046d, 0x0890)}, /* Logitech QuickCam traveler */
+{USB_DEVICE (0x10fd, 0x7e50)}, /* FlyCam Usb 100 */
+{USB_DEVICE (0x06e1, 0xa190)}, /* ADS Instant VCD */
+{USB_DEVICE (0x055f, 0xc220)}, /* Gsmart Mini */
+{USB_DEVICE (0x0733, 0x2211)}, /* Jenoptik jdc 21 LCD */
+{USB_DEVICE (0x046d, 0x0900)}, /* Logitech Inc. ClickSmart 310 */
+{USB_DEVICE (0x055f, 0xc360)}, /* Mustek DV4000 Mpeg4 */
+{USB_DEVICE (0x08ca, 0x2024)}, /* Aiptek DV3500 Mpeg4 */
+{USB_DEVICE (0x046d, 0x0905)}, /* Logitech ClickSmart820 */
+{USB_DEVICE (0x05da, 0x1018)}, /* Digital Dream Enigma 1.3 */
+{USB_DEVICE (0x0c45, 0x6025)}, /* Xcam Shanga */
+{USB_DEVICE (0x0733, 0x1311)}, /* Digital Dream Epsilon 1.3 */
+{USB_DEVICE (0x041e, 0x401d)}, /* Creative Webcam NX ULTRA */
+{USB_DEVICE (0x08ca, 0x2016)}, /* Aiptek PocketCam 2 Mega */
+{USB_DEVICE (0x0734, 0x043b)}, /* 3DeMon USB Capture aka */
+{USB_DEVICE (0x041E, 0x4018)}, /* Creative Webcam Vista (PD1100) */
+{USB_DEVICE (0x0546, 0x3273)}, /* Polaroid PDC2030*/
+{USB_DEVICE (0x041e, 0x401f)}, /* Creative Webcam Notebook PD1171*/
+{USB_DEVICE (0x041e, 0x4017)}, /* Creative Webcam Mobile PD1090*/
+{USB_DEVICE (0x046d, 0x08a2)}, /* Labtec Webcam Pro*/
+{USB_DEVICE (0x055f, 0xd003)}, /* Mustek WCam300A*/
+{USB_DEVICE (0x0458, 0x7007)}, /* Genius VideoCam V2*/
+{USB_DEVICE (0x0458, 0x700c)}, /* Genius VideoCam V3*/
+{USB_DEVICE (0x0458, 0x700f)}, /* Genius VideoCam Web V2*/
+{USB_DEVICE (0x041e, 0x401e)}, /* Creative Nx Pro*/
+{USB_DEVICE (0x0c45, 0x6029)}, /* spcaCam@150 */
+{USB_DEVICE (0x0c45, 0x6009)}, /* spcaCam@120 */
+{USB_DEVICE (0x0c45, 0x600d)}, /* spcaCam@120 */
+{USB_DEVICE (0x04fc, 0x5330)}, /* Digitrex 2110*/
+{USB_DEVICE (0x055f, 0xc540)}, /* Gsmart D30*/
+{USB_DEVICE (0x0ac8, 0x301b)}, /* Asam Vimicro*/
+{USB_DEVICE (0x041e, 0x403a)}, /* Creative Nx Pro 2*/
+{USB_DEVICE (0x055f, 0xc211)}, /* Kowa Bs888e Microcamera*/
+{USB_DEVICE (0x0ac8, 0x0302)}, /* Z-star Vimicro zc0302*/
+{USB_DEVICE (0x0572, 0x0041)}, /* Creative Notebook cx11646*/
+{USB_DEVICE (0x08ca, 0x2022)}, /* Aiptek Slim 3200*/
+{USB_DEVICE (0x046d, 0x0921)}, /* Labtec Webcam */
+{USB_DEVICE (0x046d, 0x0920)}, /* QC Express */
+{USB_DEVICE (0x0923, 0x010f)}, /* ICM532 cams */
+{USB_DEVICE (0x055f, 0xc200)}, /* Mustek Gsmart 300 */
+{USB_DEVICE (0x0733, 0x2221)}, /* Mercury Digital Pro 3.1p*/
+{USB_DEVICE (0x041e, 0x4036)}, /* Creative Live ! */
+{USB_DEVICE (0x055f, 0xc005)}, /* Mustek Wcam300A */
+{USB_DEVICE (0x041E, 0x403b)}, /* Creative Webcam Vista (VF0010) */
+{USB_DEVICE (0x0545, 0x8333)}, /* Veo Stingray */
+{USB_DEVICE (0x0545, 0x808b)}, /* Veo Stingray */
+{USB_DEVICE (0x10fd, 0x8050)}, /* Typhoon Webshot II USB 300k */
+{USB_DEVICE (0x0000, 0x0000)}, /* MystFromOri Unknow Camera */

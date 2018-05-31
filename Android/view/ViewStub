@@ -1,0 +1,40 @@
+   ViewStub只能加载一次，重复加载会导致异常，这是因为ViewStub只要加载过一次，其自身就会被移除，把并自身所包含的内容全部传给父布局
+
+   <ViewStub
+        android:id="@+id/vs"
+        android:layout="@layout/viewstub"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+        <?xml version="1.0" encoding="utf-8"?>
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/hello_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DATA EMPTY!"/>
+        </FrameLayout>
+
+        public class MainActivity extends AppCompatActivity {
+            private ViewStub viewStub;
+            private TextView textView;
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.activity_main);
+                viewStub = (ViewStub) findViewById(R.id.vs);
+                //textView  = (TextView) findViewById(R.id.hello_tv);空指针
+            }
+            public  void inflate(View view){
+                viewStub.inflate();
+                //textView  = (TextView) viewStub.findViewById(R.id.hello_tv);空指针
+                textView  = (TextView) findViewById(R.id.hello_tv);
+            }
+            public void setData(View view){
+                textView.setText("DATA!!");
+
+            }
+        }

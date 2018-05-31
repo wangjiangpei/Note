@@ -1,0 +1,20 @@
+compile 'org.greenrobot:eventbus:3.0.0'
+
+ EventBus.getDefault().register(this);
+   if (EventBus.getDefault().isRegistered(this)) {
+             EventBus.getDefault().unregister(this);
+         }
+          EventBus.getDefault().post();
+            // 注册订阅者
+                  EventBus.getDefault().register(this);
+                        // 注销订阅者
+                          EventBus.getDefault().unregister(this);
+// 发布事件
+EventBus.getDefault().post(new MessageEvent("Hello EventBus!"));
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        Log.i(TAG, "message is " + event.getMessage());
+        // 更新界面
+        mTvMessage.setText(event.getMessage());
+    }

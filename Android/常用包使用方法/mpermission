@@ -1,0 +1,12 @@
+compile 'com.zhy:mpermission-compiler:1.0.0'
+compile 'com.zhy:mpermission-api:1.0.0'
+ public void requestPermission() {
+        Logs.i("执行");
+        MPermissions.requestPermissions(mContext, 1, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
+    }
+
+    @PermissionGrant(1)
+    public void requestSdcardSuccess() {
+        Logs.i("文件授权成功");
+        jiami();
+    }

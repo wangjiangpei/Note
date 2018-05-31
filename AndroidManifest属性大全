@@ -1,0 +1,158 @@
+<activity>
+        android:windowSoftInputMode="stateHidden|stateAlwaysHidden"
+        android:screenOrientation="landscape"
+
+
+
+
+        1.android:configChanges="orientation"
+        1、不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次
+        2、设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次
+        3、设置Activity的android:configChanges="orientation|keyboardHidden"时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法
+
+        android:allowBackup该属性属于<application>节点
+        它表示是否允许应用程序参与备份。如果将该属性设置为false,则即使备份整个系统，
+        也不会执行这个应用程序的备份操作，而整个系统备份能导致所有应用程序数据通过ADB来保存。
+        该属性必须是一个布尔值，或为true，或为false，其默认值为true。
+
+        2.allowTaskReparenting
+        android:allowTaskReparenting是任务调整属性，它表明这个任务重新被送到前台的时候，
+        该应用程序所定义的Activity是否可以从被启动的任务中转移到有相同亲和力的任务中。
+        这个属性的数据类型是布尔型，它的取值只有true和false两种。它不是必须指定的属性，
+        如果我们没有显示指定这个属性，那么它将被指定为默认值false。
+        <application>和<activity>节点上都有这个属性可以配置。如果将该属性配置在<application>节点上，并且没有在<activity>节点上配置的情况下，
+        <application>节点上的值将会应用到每一个<activity>节点上。反之，如果<activity>节点上配置了这个属性，则以<activity>节点上的值为准。
+
+        3.android:killAfterRestore
+        这个属性是指在一个完整的系统恢复操作之后应用程序是否被终止。单个应用程序的恢复操作不会引起应用程序的终止。完整的系统恢复操作一般仅在手机首次安装时才会发生一次。第三方应用通常都不需要使用该属性。
+        该属性的默认值为true，意为在完整的系统恢复期间，应用程序在结束处理其数据之后将被终止
+
+        4.android:restoreAnyVersion
+        它指是否允许恢复任意版本的备份数据来恢复应用程序的数据，即使备份明显来自于当前安装在设备上的应用程序的更新版本。
+        将该属性设置为true，则将允许备份管理器尝试恢复操作，有的时候版本不匹配表明数据是不兼容的，
+        这个时候如果可以恢复到不同版本的数据，那么应用程序将承受很大的风险，所以请谨慎使用此属性
+        它必须是布尔值，或为true,或为false，默认值为false。
+
+        5.android:debuggable
+        这是一个布尔型标志，它的取值是true或false，这个标志指示应用程序在用户模式的设备上是否可以调试。
+        如果为true，则表示应用程序可以被调试；如果为false，则表示应用程序不可以被调试。它的默认值是false。
+        使用这个标志唯一需要注意的是，它只在用户模式的机器上生效，用户模式既是买着用的android手机，而虚拟机一般都是工程模式。
+        当你创建一个项目的时候，一般这个属性没有配置，但它有默认值，为false。
+
+        6.android:description
+        这个属性是描述应用程序的，它是一个用户只读的文本，比应用程序标签android:label的描述更长，更详细。
+        但需要注意的是，这里必须配置为一个字符串资源的引用，不能像应用程序标签那样设置为一个字符串。它没有默认值。
+        首先，我们要知道为什么Android要给这个限制（这里必须配置为一个字符串资源的引用），
+        下面对比一下Android对android:label和android:description属性的差异：
+        <attr name="label" format="reference|string"/>
+        <attr name="description" format="reference"/>
+        上面两行代码是对这两个属性的定义，其中label的format为reference|string，
+        这表示它支持资源引用和字符串两种格式，而description的format仅为reference，
+        这表示当配置android:description属性时，它只能是一个引用。
+
+        7.android:enabled
+        默认情况下，Android系统会自行实例化每一个应用程序的组件，包括Android四大组件，
+        但如果我们需要自己完成这些事情的话，就需要使用android:enabled属性来限制Android系统的行为。
+        这个属性表明Android系统是否可以被实例化应用程序组件，如果其值为true，则说明应用程序组件可以被Android系统自动实例化；
+        如果为false，则说明实例化组件的工作需要手工完成。该属性的默认值为true。
+        每一个组件都可以单独定义自己的enabled属性。如果这个属性定义在<application>节点中，
+        那么它会默认将每个组件的enabled属性设置为相同的值。如果每一个组件单独定义了这个属性，
+        那么<application>节点上定义的属性对此组件不再生效，就由自己的enabled属性决定。
+
+        9.android:hardwareAccelerated
+        android:hardwareAccelerated标志指示硬件加速渲染功能是否对应用程序中的所有Activity和View启用，如果启用，则为true，否则为false，其默认值是false。
+
+        从Android 3.0开始，硬件加速的OpenGL渲染器对所有应用程序都有效，这样做的目的是改善大多数2D图形操作的性能。
+        当硬件加速渲染器被启用时，大多数操作（包括Canvas,Paint,Xfermode,ColorFilter,Shader和Camera）都会被加速，
+        这样产生的结果是更顺滑的动画效果，更顺滑的滚动效果以及整体响应的改进。即使对于那些不能明确使用OpenGL库的应用程序，其结果也一样。
+        需要注意的是，不是所有的OpenGL操作都是被加速的。如果启用硬件加速渲染器，就要先测试应用程序以便确保它可以无误地使用渲染器。
+        当没有设置这个标志的时候，它的默认值取决于是否配置了android:targetSdkVersion。如果没有配置，
+        则Android默认将android:targetSdkVersion作为当前设备系统的SDK版本。
+        当android:targetSdkVersion属性的值大于或者等于当前系统版本时，则启用硬件加速，反之则禁用硬件加速。
+
+        10.android:label / android:icon
+
+        11.android:logo
+
+        12.android:manageSpaceActivity
+        该属性是一个Activity子类的全名，用户使用它可以管理设备上该应用程序占有的内存。Activity也应该用<activity>元素声明。
+
+        13.android:permission
+        该属性是客户端与应用程序交互所必须拥有的许可名，它是给应用程序的所有组件设置许可的便捷方式，可以被组件各自的许可属性值所覆盖。
+
+        14.android:persistent
+        该属性用来表明应用程序是否应该在任何时候都保持运行状态，若为true，
+        则表示应该，false则表示不应该，其默认值为false。通常，应用程序不应该设置本属性，而持续模式仅仅对于某些系统应用程序才有意义
+
+        15.android:process
+        该属性是应用程序所有组件运行的进程名。每个组件都能够设置自己的进程属性，以此来覆盖原来的默认值。
+        该属性的默认值是当前的应用程序包名。当应用程序的第一个组件需要运行时，Android:就生成一个进程，
+        所有的组件都将在该进程里运行。默认情况下，进程名与<manifest>元素里设置的包名相匹配。
+
+        16.android:taskAffinity
+        它是应用程序所有Activity都适用的任务亲和力，除了那些将不同任务亲和力设置在自身taskAffinity属性里的Activity。我们可以这样理解这个属性：该Activity更喜欢待在哪个任务中。
+        对于不同版本的Android SDK来说，框架对该属性的处理是不一样的。下面的代码说明了还同处理中出现的一些问题：
+        if(owner.applicationInfo.targetSdkVersion>=Build.VERSION_CODES.FROYO){
+        str=sa.getNonConfigurationString(com.android.internal.R.styleable.AndroidManifestApplication_taskAffinity,0);
+        }else{
+        str=sa.getNonConfigurationString(com.android.internal.R.styleable.AndroidManifestApplication_taskAffinity);
+        }
+        ai.taskAffinity=buildTaskAffinityName(ai.packageName,ai.packageName,str,outError);
+        对于Android 2.2(Froyo)以后的版本，如果没有设置这个属性，则会采用默认值0，而之前的版本则不会提供默认值。
+
+        17.android:theme
+        android:theme属性为应用程序定义了一个整体风格。当开发一个商业应用程序时，风格是要考虑的重要因素之一。
+        因此，为了保证应用程序的所有界面保持一定的风格标准，要尽量使用这个属性为应用程序定义风格。
+        android:theme属性是一个可以覆盖的属性。当我们需要对某个界面做一些特殊的处理时，
+        只需要在对应的节点配置此属性，就可以覆盖掉应用程序配置的整体风格了。
+        对于框架而言，该属性不是必须配置的。如果没有配置，Android则会认为它的值为0，即无资源，如下代码所示：
+        ai.theme=sa.getResourceId(com.android.internal.R.styleable.AndroidManifestApplication_theme,0);
+        如果在<application>的某个子节点上配置了这个属性，那么框架将会覆盖整体风格而使用子节点上配置的风格：
+        a.info.theme=sa.getResource(com.android.internal.R.styleable.AndroidManifestActivity_theme,0);
+        现在我们举例说明如何使用这个属性。例如，给<application>节点增加android:theme属性，
+        它的值指向Animation.Dialog的风格。相关代码如下：
+        android:theme="@android:style/Animation.Dialog"
+        需要注意的是，这里的@android:style表示此资源位于“android”的空间中，也就是SDK预定义的那些资源。
+        刚刚说到增加的theme属性指向Animation.Dialog风格，其中风格是这样定义的：
+        <style name="Animation.Dialog">
+        <item name=""windowEnterAnimation>@anim/dialog_enter</item>
+        <item name="windowExitAnimation">@anim/dialog_exit</item>
+        </style>
+        这里规定了进入和推出的动画效果。
+        除了使用SDK提供的风格资源以外，我们还可以使用自定义的风格资源，那么如何配置自定义风格呢？，大家可以按照下面的操作步骤自己动手实现。
+        ①定义自己的风格资源。在工程res/value/目录下新建你的application_style.xml文件。
+        ②打开刚刚创建的文件，加入如下代码：
+        <?xml version="1.0" encoding="utf-8"?>
+        <resources>
+            <style name="myTheme">
+            </style>
+        </resources>
+
+        18.android:uiOptions
+        该属性用于开启Activity UI附加的扩展导航栏。在配置这个属性时，可供选择的值必须是下表所示的两个值中的一个。
+        值	                        描述
+        none	                    关闭扩展栏。如果没有配置android:uiOptions属性，此为默认值
+
+        splitActionBarWhenNarrow	当在横向空间受到限制时，比如当手机处于纵向模式，
+                                    在屏幕底部添加一个状态栏来显示ActionBar中的动作项。
+                                    只有少数的Action项会出现在动作栏中。
+                                    操作栏将被分成顶部导航部分和用于动作项的底部栏。
+                                    这就保证了有一个合理数量的空间可用。
+
+        需要说明的是，android:uiOption属性是自Android4.0以后才提供的。
+        因此，在需要使用该属性的时候，孙弱保证使用Android4.0以后的SDK（API14）
+
+
+        19.android:vmSafeMode
+        此属性用于指示虚拟机是否在安全模式下运行，它是一个布尔值，当没有配置它的时候，其默认值为false。示例代码如下：
+        if(sa.getBoolean(com.android.internal.R.styleable.AndroidManifestApplication_vmsafeMode,false)){
+        ai.flags|=ApplicationInfo.FLAG_VM_SAFE_MODE;
+        }
+
+
+        20.android:largeHeap
+        此属性指示应用程序是否使用一个比较大的堆创建，它是一个布尔值，在没有配置的情况下，它的默认值是false，示例代码如下：
+        if(sa.getBoolean(com.android.internal.R.styleable.AndroidManifestApplication_largeHeap,false)){
+        ai.flags|=ApplicationInfo.FLAG_LARGE_HEAP;
+        }
+        至此，我们介绍完了<application>节点支持的所有节点的用法，代码实现，含义及用法。在开发应用程序的时候，开发者应该根据具体需求有选择的使用这些属性，以使应用程序更高效地运行。

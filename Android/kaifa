@@ -1,0 +1,26 @@
+强制
+        webservice  使用统一工具
+        所有地址方法名 等数据只能出现在一个类里
+        例如:
+         public class LoadTools {
+         public static String url = "http://59.110.60.123:9000/PMon/Service.asmx";
+
+         public static WebBuilder getWebBuilder(String methodName) {
+         Logs.i(url);
+         return new WebBuilder()
+         .url(url)
+         .nameSpace("http://tempuri.org/")
+         .methodName(methodName);
+         }
+
+         public static void load(String value, WebCallBack webCallBack) {
+         getWebBuilder("SecondHandApp").addParams("parameters", value).builder(webCallBack);
+         }
+
+         public static void login(String value, WebCallBack webCallBack) {
+         getWebBuilder("Login2App").addParams("parameters", value).builder(webCallBack);
+         }
+         }
+
+可选
+1, 所有View类必须继承 自定义类  可以为空继承    以便于后期修改

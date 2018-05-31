@@ -1,0 +1,14 @@
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
+        maven { url "https://jitpack.io" }
+//        google()
+        maven{
+//            url 'http://192.168.100.238:8081/nexus/content/repositories/releases/'
+                url 'http://localhost:8081/nexus/content/repositories/releases/'
+//            url 'http://localhost:8081/repository/maven-releases/'
+//            url 'http://hocalhost:8081/nexus/content/groups/public/'
+        }
+    }
+}
