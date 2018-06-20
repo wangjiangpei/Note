@@ -1,0 +1,43 @@
+ //高斯模糊
+    compile 'net.qiujuer.genius:blur:2.0.0-beta4'
+
+
+    package com.dscs.res.view;
+
+    import android.content.Context;
+    import android.graphics.Bitmap;
+    import android.graphics.drawable.BitmapDrawable;
+    import android.os.Build;
+    import android.support.annotation.RequiresApi;
+    import android.util.AttributeSet;
+    import android.widget.RelativeLayout;
+
+    import net.qiujuer.genius.blur.StackBlur;
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public class GeniusLayout extends RelativeLayout {
+
+        public GeniusLayout(Context context) {
+            super(context);
+            init(context);
+        }
+
+        public GeniusLayout(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            init(context);
+        }
+
+        public GeniusLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+            super(context, attrs, defStyleAttr);
+            init(context);
+        }
+
+        private void init(Context context) {
+            Bitmap mBitmap = ((BitmapDrawable) getBackground()).getBitmap();
+
+            //主要
+            Bitmap newBitmap = StackBlur.blur(mBitmap, (int)
+                    10, false);
+            setBackground(new BitmapDrawable(newBitmap));
+        }
+    }

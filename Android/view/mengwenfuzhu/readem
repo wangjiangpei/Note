@@ -1,0 +1,26 @@
+   <declare-styleable name="MWAssistTextView">
+        <attr name="textSize" format="dimension" />
+        <attr name="backColor" format="color" />
+        <attr name="text" format="string" />
+        <attr name="compression" format="float" />
+        <attr name="location" format="integer">
+            <enum name="left" value="1" />
+            <enum name="top" value="2" />
+            <enum name="right" value="3" />
+            <enum name="bottom" value="4" />
+        </attr>
+    </declare-styleable>
+
+
+            <com.yinan.gas_staion.ui.view.MWAssistTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:text="@string/title_vehicle_get"
+                                android:textSize="20dp"
+                                app:backColor="#00ffffff"
+                                app:compression="0.7"
+                                app:location="top"
+                                app:text="@string/title_vehicle_get_m"
+                                app:textSize="@dimen/assist_size" />

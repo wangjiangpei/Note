@@ -1,0 +1,24 @@
+task makeJar(dependsOn: ['compileReleaseJavaWithJavac'], type: Jar) {
+    def jarName = "NumberKey.jar"
+    delete 'build/libs/' + jarName
+//    delete 'build/libs/yourname2.jar'
+    appendix = "demo"
+    baseName = "androidJar"
+    version = "1.0.0"
+    classifier = "release"
+    //后缀名
+    extension = "jar"
+    //最终的 Jar 包名，如果没设置，默认为 [baseName]-[appendix]-[version]-[classifier].[extension]
+    archiveName = jarName
+    //需打包的资源所在的路径集
+    def srcClassDir = [project.buildDir.absolutePath + "/intermediates/classes/release"];
+    //初始化资源路径集
+    from srcClassDir
+    //去除路径集下部分的资源
+    exclude "okhttphelper/clz/com/okhttphelper/BuildConfig.class"
+    exclude "**/R.class"
+    exclude "**/R\$*.class"
+    //只导入资源路径集下的部分资源
+//    include "okhttphelper/clz/com/okhttphelper/**/*.class"
+
+}
