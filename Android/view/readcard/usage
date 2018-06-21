@@ -1,0 +1,13 @@
+    //初始化
+ReaderSDK.init(this);
+    //实例
+tools = ReaderSDK.read().setListener(new ReadListener() {
+    @Override
+    public void onResult(ReadTools tools, final IDCardInfo info) {
+    }
+   }
+}
+    //启动
+tools.start();
+    //关闭
+tools.stop();
