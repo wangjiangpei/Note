@@ -1,0 +1,9 @@
+        android.widget.ArrayAdapter adapter = android.widget.ArrayAdapter.createFromResource(this,R.array.condition,R.layout.spinner);//new ArrayAdapter<String>(this,R.layout.spinner ,numbers);
+        //第三步：为适配器设置下拉列表下拉时的菜单样式。
+        adapter.setDropDownViewResource(R.layout.custom_listview_text_item);
+        //第四步：将适配器添加到下拉列表上
+        condition.setAdapter(adapter);
+        condition.setSelection(0);
+
+
+        condition.getSelectedItem()

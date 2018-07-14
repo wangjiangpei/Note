@@ -1,0 +1,27 @@
+1,
+public static float getTextViewLength(TextView textView,String text){
+TextPaint paint = textView.getPaint();
+// 得到使用该paint写上text的时候,像素为多少
+float textLength = paint.measureText(text);
+return textLength;
+}
+
+
+
+
+
+
+
+
+2,
+Paint paint = new Paint();
+        char[] cs = "c啊1，,tbG".toCharArray();
+        for (char c : cs) {
+            Rect r = new Rect();
+            char[] txt = new char[] { c };
+            paint.getTextBounds(txt, 0, 1, r);
+
+    Log.e("tt", "字符:" + c + "---height:" + (r.bottom - r.top));
+    Log.e("tt", "字符:" + c + "width:" + (r.right - r.left));
+
+        }

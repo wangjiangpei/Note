@@ -1,0 +1,24 @@
+WindowManager mWindowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+
+    /**
+     * add the rootView 显示悬浮窗
+     */
+    private void addLockView(){
+        if(mWindowManager == null) return ;
+        mRootView = new RootView(getApplicationContext());
+        WindowManager.LayoutParams param = new WindowManager.LayoutParams();
+        param.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        if(Config.sIsFull) param.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN |
+                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN;
+        param.format = PixelFormat.RGBA_8888;
+        param.width = WindowManager.LayoutParams.MATCH_PARENT;
+        param.height = WindowManager.LayoutParams.MATCH_PARENT;
+        mWindowManager.addView(mRootView, param);
+    }
+    /**
+     * remove the rootView 移除悬浮窗
+     */
+    private void removeLockView(){
+        if(mWindowManager == null) return ;
+        mWindowManager.removeView(mRootView);
+    }

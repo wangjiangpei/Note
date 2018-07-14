@@ -1,0 +1,3 @@
+Error: java.util.concurrent.ExecutionException: com.android.tools.aapt2.Aapt2Exception: AAPT2 error: check logs for details :app:mergeDebugResources FAILED
+解决
+android.enableAapt2=false

@@ -1,0 +1,52 @@
+uploadArchives {
+    repositories {
+        //http://localhost:8081/repository/maven-releases/   3.8
+        //http://localhost:8081/nexus/content/repositories/releases  2.14.5
+        mavenDeployer {
+        //repository(url: "file:D:\\WorkTools\\mavenRepository") { }//保存本地 然后上传到git
+            repository(url: "http://localhost:8081/nexus/content/repositories/releases/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project {
+                name 'readcard'
+                version '1.1.0'
+                artifactId 'readcard'
+                groupId 'com.yinansoft'
+                packaging 'aar'
+                description 'read card lib for Android'
+            }
+        }
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:D:\\WorkTools\\mavenRepository") {
+            }
+            pom.project {
+                name 'tools'
+                version '1.0.2'
+                artifactId 'tools'
+                groupId 'com.dscs'
+                packaging 'aar'
+                description 'lib for Android'
+            }
+        }
+    }
+}
+
+
+使用方法
+ 工程的gradle配置
+
+1, allprojects {
+          repositories {
+              jcenter()
+              maven{
+                  url 'https://raw.githubusercontent.com/wangjiangpei/tools/master'
+              }
+          }
+      }
+
+ 2,

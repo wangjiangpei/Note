@@ -1,0 +1,38 @@
+          <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.yinan.gas_staion.ui.view.MWAssistRadioButton
+                        android:id="@+id/condition_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="大于" />
+
+                    <com.yinan.gas_staion.ui.view.MWAssistRadioButton
+                        android:id="@+id/condition_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="小于" />
+
+                </RadioGroup>
+
+
+                 RadioGroup02.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                               int checkedId = radioGroup.getCheckedRadioButtonId();
+                                 if (checkedId == R.id.renlianorzhiwen) {
+
+
+                                 }
+                               if(a.getChecked()){
+
+                               }else{
+
+                               }
+
+
+                               }
+                            }
+                  }
