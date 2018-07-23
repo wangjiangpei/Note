@@ -1,0 +1,29 @@
+  /**
+     * @param activity
+     * @return 判断当前手机是否是全屏
+     */
+    public static boolean isFullScreen(Activity activity) {
+        int flag = activity.getWindow().getAttributes().flags;
+        if((flag & WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                == WindowManager.LayoutParams.FLAG_FULLSCREEN) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+
+    全屏设置
+     <item name="android:windowFullscreen">true</item>
+
+     getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+     getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+     getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
+                   WindowManager.LayoutParams. FLAG_FULLSCREEN);//全屏
+
+
+
+                   取消全屏的方法
+
+                   getWindow().clearFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN);
